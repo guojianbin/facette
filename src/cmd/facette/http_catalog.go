@@ -13,6 +13,18 @@ import (
 	"github.com/fatih/set"
 )
 
+// swagger:operation GET /catalog/ catalogRoot
+//
+// Returns catalog entries count per type
+//
+// ---
+// produces:
+// - application/json
+// responses:
+//   '200':
+//     description: catalog root response
+//     schema:
+//       type: object
 func (w *httpWorker) httpHandleCatalogRoot(rw http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -26,6 +38,40 @@ func (w *httpWorker) httpHandleCatalogRoot(rw http.ResponseWriter, r *http.Reque
 	httputil.WriteJSON(rw, result, http.StatusOK)
 }
 
+// swagger:operation GET /catalog/{type}/ catalogType
+//
+// Returns catalog entries for a given type
+//
+// ---
+// produces:
+// - application/json
+// parameters:
+// - name: type
+//   in: path
+//   description: type of catalog items
+//   required: true
+//   type: string
+// - name: filter
+//   in: query
+//   description: term to filter names on
+//   type: string
+// - name: offset
+//   in: query
+//   description: offset to return items from
+//   type: integer
+// - name: limit
+//   in: query
+//   description: number of items to return
+//   type: integer
+// responses:
+//   '200':
+//     description: catalog list response
+//     schema:
+//       type: array
+//   '400':
+//     description: invalid parameter
+//     schema:
+//       '$ref': '#/definitions/invalidParameter'
 func (w *httpWorker) httpHandleCatalogType(rw http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -80,6 +126,37 @@ func (w *httpWorker) httpHandleCatalogType(rw http.ResponseWriter, r *http.Reque
 	httputil.WriteJSON(rw, result, http.StatusOK)
 }
 
+// swagger:operation GET /catalog/{type}/{name} catalogEntry
+//
+// Return catalog entry information given a type and its name
+//
+// ---
+// produces:
+// - application/json
+// parameters:
+// - name: type
+//   in: path
+//   description: type of catalog items
+//   required: true
+//   type: string
+// - name: name
+//   in: path
+//   description: name of the catalog item
+//   required: true
+//   type: string
+// responses:
+//   '200':
+//     description: catalog entry response
+//     schema:
+//       type: object
+//   '400':
+//     description: invalid parameter
+//     schema:
+//       '$ref': '#/definitions/invalidParameter'
+//   '404':
+//     description: not found error
+//     schema:
+//       '$ref': '#/definitions/notFound'
 func (w *httpWorker) httpHandleCatalogEntry(rw http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 

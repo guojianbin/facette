@@ -21,6 +21,18 @@ type httpInfo struct {
 	ReadOnly   bool     `json:"read_only,omitempty"`
 }
 
+// swagger:operation GET / info
+//
+// Returns service version and support information
+//
+// ---
+// produces:
+// - application/json
+// responses:
+//   '200':
+//     description: info response
+//     schema:
+//       type: object
 func (w *httpWorker) httpHandleInfo(rw http.ResponseWriter, r *http.Request) {
 	var result httpInfo
 

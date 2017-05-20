@@ -30,6 +30,8 @@ GULP_ARGS = --no-color
 PANDOC ?= pandoc
 PANDOC_ARGS = --standalone --to man
 
+SWAGGER ?= swagger
+
 BIN_LIST = $(patsubst src/cmd/%,%,$(wildcard src/cmd/*))
 PKG_LIST = $(patsubst src/%,%,$(wildcard src/facette/*))
 MAN_LIST = $(patsubst docs/man/%.md,%,$(wildcard docs/man/*.[0-9].md))
@@ -94,6 +96,12 @@ build-docs:
 		install -d -m 0755 $(BUILD_DIR)/man && $(PANDOC) $(PANDOC_ARGS) docs/man/$$man.md >$(BUILD_DIR)/man/$$man && \
 			$(call mesg_ok) || $(call mesg_fail); \
 	done
+
+build-apidoc:
+	@$(call mesg_start,docs,Generating Swagger specification file...)
+	@install -d -m 0755 $(BUILD_DIR)/docs && $(SWAGGER) generate spec -b ./src/cmd/facette \
+			-o $(BUILD_DIR)/docs/swagger.json && \
+		$(call mesg_ok) || $(call mesg_fail)
 
 test: test-bin
 
