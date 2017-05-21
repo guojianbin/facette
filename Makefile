@@ -11,6 +11,7 @@ GO ?= go
 
 GOOS ?= $(shell $(GO) env GOOS)
 GOARCH ?= $(shell $(GO) env GOARCH)
+GOROOT ?= $(shell $(GO) env GOROOT)
 
 BUILD_NAME = facette-$(GOOS)-$(GOARCH)
 BUILD_DIR = build/$(BUILD_NAME)
@@ -97,9 +98,11 @@ build-docs:
 			$(call mesg_ok) || $(call mesg_fail); \
 	done
 
-build-apidoc:
+build-apidoc: build-dir
 	@$(call mesg_start,docs,Generating Swagger specification file...)
-	@install -d -m 0755 $(BUILD_DIR)/docs && $(SWAGGER) generate spec -b ./src/cmd/facette \
+	@install -d -m 0755 $(BUILD_DIR)/docs && GOROOT=$(GOROOT) $(SWAGGER) generate spec \
+			-b ./src/cmd/facette \
+			-t "$(BUILD_TAGS)" \
 			-o $(BUILD_DIR)/docs/swagger.json && \
 		$(call mesg_ok) || $(call mesg_fail)
 
