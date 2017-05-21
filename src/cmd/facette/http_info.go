@@ -26,6 +26,8 @@ type httpInfo struct {
 // Returns service version and support information
 //
 // ---
+// tags:
+// - info
 // produces:
 // - application/json
 // responses:

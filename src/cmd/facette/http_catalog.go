@@ -18,6 +18,8 @@ import (
 // Returns catalog entries count per type
 //
 // ---
+// tags:
+// - catalog
 // produces:
 // - application/json
 // responses:
@@ -43,6 +45,8 @@ func (w *httpWorker) httpHandleCatalogRoot(rw http.ResponseWriter, r *http.Reque
 // Returns catalog entries for a given type
 //
 // ---
+// tags:
+// - catalog
 // produces:
 // - application/json
 // parameters:
@@ -131,6 +135,8 @@ func (w *httpWorker) httpHandleCatalogType(rw http.ResponseWriter, r *http.Reque
 // Return catalog entry information given a type and its name
 //
 // ---
+// tags:
+// - catalog
 // produces:
 // - application/json
 // parameters:
