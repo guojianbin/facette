@@ -14,8 +14,8 @@ import (
 type bulkRequest []bulkRequestEntry
 
 type bulkRequestEntry struct {
-	Endpoint string                 `json:"endpoint"`
 	Method   string                 `json:"method"`
+	Endpoint string                 `json:"endpoint"`
 	Params   map[string]interface{} `json:"params"`
 	Data     json.RawMessage        `json:"data"`
 }
@@ -30,6 +30,35 @@ type bulkResponseEntry struct {
 func init() {
 }
 
+// swagger:operation POST /bulk/ postBulk
+//
+// Bulk API requests execution
+//
+// This endpoint accepts a list of API requests to execute in bulk,
+// and returns a list of API responses corresponding to the requests.
+//
+// ---
+// tags:
+// - bulk
+// parameters:
+// - name: requests
+//   in: body
+//   description: list of API requests to execute in bulk
+//   required: true
+//   type: array
+//   items:
+//     type: object
+// responses:
+//   '200':
+//     description: list of API responses
+//     schema:
+//       type: array
+//       items:
+//         type: object
+//   '400':
+//     description: invalid parameter
+//     schema:
+//       type: object
 func (w *httpWorker) httpHandleBulk(rw http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
