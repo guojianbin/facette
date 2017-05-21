@@ -34,8 +34,8 @@ func init() {
 //
 // Bulk API requests execution
 //
-// This endpoint accepts a list of API requests to execute in bulk,
-// and returns a list of API responses corresponding to the requests.
+// This endpoint accepts a list of API requests to execute in bulk, and returns a list of API responses
+// corresponding to the requests.
 //
 // ---
 // tags:

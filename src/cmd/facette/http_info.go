@@ -25,6 +25,10 @@ type httpInfo struct {
 //
 // Returns service version and supported features
 //
+// This endpoint returns the SQL storage drivers and catalog connectors supported by the Facette back-end.
+// If the backend is not configured to hide build information details, it will also return the detailed build
+// information.
+//
 // ---
 // tags:
 // - info
