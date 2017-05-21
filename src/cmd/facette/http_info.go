@@ -21,15 +21,13 @@ type httpInfo struct {
 	ReadOnly   bool     `json:"read_only,omitempty"`
 }
 
-// swagger:operation GET / info
+// swagger:operation GET / getInfo
 //
-// Returns service version and support information
+// Returns service version and supported features
 //
 // ---
 // tags:
 // - info
-// produces:
-// - application/json
 // responses:
 //   '200':
 //     description: info response

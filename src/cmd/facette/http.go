@@ -2,7 +2,11 @@
 //
 // Facette RESTful API documenation
 //
+// Host: localhost:12003
 // BasePath: /api/v1
+// Version: 1
+// Produces:
+// - application/json
 //
 // swagger:meta
 package main

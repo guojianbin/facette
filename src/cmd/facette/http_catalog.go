@@ -13,15 +13,15 @@ import (
 	"github.com/fatih/set"
 )
 
-// swagger:operation GET /catalog/ catalogRoot
+// swagger:operation GET /catalog/ getCatalogSummary
 //
-// Returns catalog entries count per type
+// Returns catalog summary
+//
+// This endpoint returns catalog entries count per type.
 //
 // ---
 // tags:
 // - catalog
-// produces:
-// - application/json
 // responses:
 //   '200':
 //     description: catalog root response
@@ -40,15 +40,13 @@ func (w *httpWorker) httpHandleCatalogRoot(rw http.ResponseWriter, r *http.Reque
 	httputil.WriteJSON(rw, result, http.StatusOK)
 }
 
-// swagger:operation GET /catalog/{type}/ catalogType
+// swagger:operation GET /catalog/{type}/ getCatalogType
 //
 // Returns catalog entries for a given type
 //
 // ---
 // tags:
 // - catalog
-// produces:
-// - application/json
 // parameters:
 // - name: type
 //   in: path
@@ -75,7 +73,7 @@ func (w *httpWorker) httpHandleCatalogRoot(rw http.ResponseWriter, r *http.Reque
 //   '400':
 //     description: invalid parameter
 //     schema:
-//       '$ref': '#/definitions/invalidParameter'
+//       type: object
 func (w *httpWorker) httpHandleCatalogType(rw http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -130,15 +128,13 @@ func (w *httpWorker) httpHandleCatalogType(rw http.ResponseWriter, r *http.Reque
 	httputil.WriteJSON(rw, result, http.StatusOK)
 }
 
-// swagger:operation GET /catalog/{type}/{name} catalogEntry
+// swagger:operation GET /catalog/{type}/{name} getCatalogEntry
 //
 // Return catalog entry information given a type and its name
 //
 // ---
 // tags:
 // - catalog
-// produces:
-// - application/json
 // parameters:
 // - name: type
 //   in: path
@@ -158,11 +154,11 @@ func (w *httpWorker) httpHandleCatalogType(rw http.ResponseWriter, r *http.Reque
 //   '400':
 //     description: invalid parameter
 //     schema:
-//       '$ref': '#/definitions/invalidParameter'
+//       type: object
 //   '404':
 //     description: not found error
 //     schema:
-//       '$ref': '#/definitions/notFound'
+//       type: object
 func (w *httpWorker) httpHandleCatalogEntry(rw http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
